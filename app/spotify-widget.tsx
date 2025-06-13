@@ -11,6 +11,7 @@ interface SongData {
   progressMs: number
   durationMs: number
   isPlaying: boolean // To potentially show a pause icon or different state
+  lastPlayed?: string | null // ISO string for last played time
 }
 
 interface SpotifyWidgetProps {
@@ -65,8 +66,61 @@ export default function SpotifyWidget({ songData }: SpotifyWidgetProps) {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`
   }
 
+  const formatDateTime = (iso: string) => {
+    const date = new Date(iso)
+    return date.toLocaleString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  }
+
   const progressPercentage = (songData.progressMs / songData.durationMs) * 100
 
+  // If not playing, but lastPlayed is present, show 'Last played' info
+  if (!songData.isPlaying && songData.lastPlayed) {
+    return (
+      <div className="w-full max-w-xs p-4 bg-[#28152c] rounded-lg text-white font-sans shadow-lg">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2 text-sm font-medium text-gray-300">
+            <SpotifyBrandIcon className="text-gray-400" />
+            Last played on Spotify
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex-shrink-0">
+            <Image
+              src={songData.albumArtUrl || "/placeholder.svg?width=80&height=80&text=Album+Art"}
+              alt={`Album art for ${songData.title}`}
+              width={72}
+              height={72}
+              className="rounded-md aspect-square object-cover"
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-base font-semibold truncate" title={songData.title}>
+              {songData.title}
+            </h2>
+            <p className="text-xs text-gray-400 truncate" title={songData.artist}>
+              {songData.artist}
+            </p>
+            <div className="mt-2">
+              <div className="flex justify-between items-center text-xs text-gray-400 mb-0.5">
+                <span>{formatTime(songData.durationMs)}</span>
+                <span>Played at</span>
+              </div>
+              <div className="text-xs text-gray-300">{formatDateTime(songData.lastPlayed)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Default: currently playing
   return (
     <div className="w-full max-w-xs p-4 bg-[#28152c] rounded-lg text-white font-sans shadow-lg">
       <div className="flex items-center justify-between mb-3">

@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { cookies } from "next/headers"
 
 export async function GET(request: NextRequest) {
   console.log("LOG: /api/auth/spotify/callback route handler started.")
@@ -60,28 +61,25 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // const { access_token, refresh_token } = data; // access_token, refresh_token, expires_in
+    const { access_token, refresh_token, expires_in } = data
     console.log("LOG: Access Token obtained successfully from Spotify.")
-    // TODO: Store tokens securely (e.g., in httpOnly cookie or database linked to a session)
-    // For now, we are not storing them, just redirecting.
 
-    const url = request.nextUrl.clone()
-    url.pathname = "/dashboard" // Redirect to the dashboard page
+    const url = new URL("http://127.0.0.1:3000/dashboard")
     console.log(`LOG: Redirecting to dashboard: ${url.pathname}`)
 
     const responseRedirect = NextResponse.redirect(url)
-    // Example: Set an httpOnly cookie for session management (more secure)
-    // responseRedirect.cookies.set('spotify_access_token', access_token, {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === 'production',
-    //   path: '/',
-    //   maxAge: data.expires_in // seconds
-    // });
-    // responseRedirect.cookies.set('spotify_refresh_token', refresh_token, {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === 'production',
-    //   path: '/',
-    // });
+    // Set HTTP-only cookies for tokens
+    responseRedirect.cookies.set("spotify_access_token", access_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: expires_in, // seconds
+    })
+    responseRedirect.cookies.set("spotify_refresh_token", refresh_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    })
     return responseRedirect
   } catch (error) {
     console.error("ERROR: Internal Server Error during Spotify callback processing:", error)
