@@ -8,6 +8,18 @@ export async function GET() {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
+  // Fetch user profile for profile URL
+  const userRes = await fetch("https://api.spotify.com/v1/me", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  let profileUrl = null;
+  if (userRes.ok) {
+    const userData = await userRes.json();
+    profileUrl = userData.external_urls?.spotify || null;
+  }
+
   // Try to get currently playing track
   const res = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
     headers: {
@@ -39,6 +51,11 @@ export async function GET() {
       durationMs: lastTrack.track.duration_ms,
       isPlaying: false,
       lastPlayed: lastTrack.played_at,
+      albumUrl: lastTrack.track.album.external_urls.spotify,
+      trackUrl: lastTrack.track.external_urls.spotify,
+      artistUrls: lastTrack.track.artists.map((a: any) => a.external_urls.spotify),
+      artistNames: lastTrack.track.artists.map((a: any) => a.name),
+      profileUrl,
     };
     return NextResponse.json(songData);
   }
@@ -60,6 +77,11 @@ export async function GET() {
     durationMs: data.item.duration_ms,
     isPlaying: data.is_playing,
     lastPlayed: null,
+    albumUrl: data.item.album.external_urls.spotify,
+    trackUrl: data.item.external_urls.spotify,
+    artistUrls: data.item.artists.map((a: any) => a.external_urls.spotify),
+    artistNames: data.item.artists.map((a: any) => a.name),
+    profileUrl,
   };
 
   return NextResponse.json(songData);
