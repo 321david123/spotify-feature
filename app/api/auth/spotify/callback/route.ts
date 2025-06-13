@@ -64,7 +64,8 @@ export async function GET(request: NextRequest) {
     const { access_token, refresh_token, expires_in } = data
     console.log("LOG: Access Token obtained successfully from Spotify.")
 
-    const url = new URL("http://127.0.0.1:3000/dashboard")
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://127.0.0.1:3000"
+    const url = new URL(`${baseUrl}/dashboard`)
     console.log(`LOG: Redirecting to dashboard: ${url.pathname}`)
 
     const responseRedirect = NextResponse.redirect(url)
