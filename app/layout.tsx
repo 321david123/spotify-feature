@@ -3,8 +3,8 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Spotify Now Playing", // This sets the browser tab title
-  description: "See what's currently playing on Spotify.",,
+  title: "Spotify Now Playing", 
+  description: "See what's currently playing on Spotify.",
   // You can also add an 'icons' property for favicons:
   // icons: {
   //   icon: '/favicon.ico', // Default icon
