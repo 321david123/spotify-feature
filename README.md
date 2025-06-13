@@ -1,30 +1,56 @@
-# Spotify now playing widget
+# Spotify Now Playing Widget
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A modern, Spotify "Now Playing" widget built with Next.js, React, and Tailwind CSS. Shows your currently playing or most recently played Spotify track, with progress bar and clickable links to Spotify.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/david-martinezs-projects/v0-spotify-now-playing-widget)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/EcvlsK1tHPh)
+# Running Locally
 
-## Overview
+1. **Clone the repository:**
+   ```bash
+   git clone <repo>
+   cd spotify-feature
+   ```
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+2. **Install dependencies:**
+   ```bash
+   pnpm install
+   # or
+   yarn install
+   ```
 
-## Deployment
+3. **Set environment variables:**
+   - Create a `.env.local` file in the root directory.
+   - Add your Spotify API credentials:
+     ```env
+     SPOTIFY_CLIENT_ID=your_spotify_client_id
+     SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+     SPOTIFY_REDIRECT_URI=http://127.0.0.1:3000/api/auth/spotify/callback
+    open http://127.0.0.1:3000 instead of localhost:3000 when testing it
+     ```
+   - Register the redirect URI in your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
 
-Your project is live at:
+4. **Run the development server:**
+   ```bash
+   pnpm dev
+   # or
+   yarn dev
+   ```
+   Open [http://127.0.0.1:3000](http://127.0.0.1:3000) in your browser.
 
-**[https://vercel.com/david-martinezs-projects/v0-spotify-now-playing-widget](https://vercel.com/david-martinezs-projects/v0-spotify-now-playing-widget)**
 
-## Build your app
+## Integrating into Another Next.js Codebase
 
-Continue building your app on:
+This widget is designed to be **modular and portable**:
 
-**[https://v0.dev/chat/projects/EcvlsK1tHPh](https://v0.dev/chat/projects/EcvlsK1tHPh)**
+Not hard to integrate 
 
-## How It Works
+  - Import and use the `SpotifyWidget` component wherever you want in your new app.
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+**No global state, no vendor lock-in, and no database required (it could use one tho) !**
+
+## Notes
+- Make sure to use HTTPS and the correct domain in production.
+- Each user sees their own Spotify activity (session-based, secure).
+
+---
+
+
