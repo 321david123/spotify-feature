@@ -1,7 +1,7 @@
 # Spotify Now Playing Widget
 
+Try it out now
 # Live demo: https://spotify-feature.davidmtz.me 
-# Try it out now
 
 A modern, Spotify "Now Playing" widget built with Next.js, React, and Tailwind CSS. Shows your currently playing or most recently played Spotify track, with progress bar and clickable links to Spotify.
 
@@ -44,7 +44,7 @@ A modern, Spotify "Now Playing" widget built with Next.js, React, and Tailwind C
 
 This widget is designed to be **modular and portable**:
 
-Not hard to integrate 
+Not hard to integrate (Uses tailwind)
 
   - Import and use the `SpotifyWidget` component wherever you want in your new app.
 
