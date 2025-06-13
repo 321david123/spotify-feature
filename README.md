@@ -2,6 +2,12 @@
 
 Try it out now
 # Live demo: https://spotify-feature.davidmtz.me 
+<img width="842" alt="Screenshot 2025-06-13 at 3 33 09 AM" src="https://github.com/user-attachments/assets/b0135871-0add-4d63-9b81-3fdfb32a33a6" />
+
+
+*last played*
+
+<img width="389" alt="Screenshot 2025-06-13 at 3 34 46 AM" src="https://github.com/user-attachments/assets/1db1cbe1-4225-4aa3-ae74-f60cd09934fd" />
 
 A modern, Spotify "Now Playing" widget built with Next.js, React, and Tailwind CSS. Shows your currently playing or most recently played Spotify track, with progress bar and clickable links to Spotify.
 
