@@ -20,7 +20,7 @@ interface SongData {
   profileUrl?: string
 }
 
-interface SpotifyWidgetProps {
+interface SpotifyNowPlayingProps {
   songData: SongData | null // Allow null if no song is playing or data isn't loaded
 }
 
@@ -41,7 +41,7 @@ const MoreHorizontalIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-export default function SpotifyWidget({ songData }: SpotifyWidgetProps) {
+export default function SpotifyNowPlaying({ songData }: SpotifyNowPlayingProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -230,4 +230,4 @@ export default function SpotifyWidget({ songData }: SpotifyWidgetProps) {
       </div>
     </div>
   )
-}
+} 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import SpotifyWidget from "../spotify-widget"
+import SpotifyNowPlaying from "../../components/spotify-now-playing"
 
 // Define the structure of the song data
 interface SongData {
@@ -84,7 +84,7 @@ export default function DashboardPage() {
       <h1 className="text-3xl font-bold text-white mb-8">Spotify Activity</h1>
       {isLoading && <p className="text-white">Loading your music...</p>}
       {error && <p className="text-red-400">Error: {error}</p>}
-      {!isLoading && !error && <SpotifyWidget songData={widgetData} />}
+      {!isLoading && !error && <SpotifyNowPlaying songData={widgetData} />}
 
       {/* You could add a logout button here */}
       {/* <button
