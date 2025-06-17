@@ -2,6 +2,10 @@
 
 Interactive Spotify widget for musicians/artists that displays an artist's discography, latest songs, and best hits. Visitors can click on artist names to explore their full catalog of music.
 
+
+
+<img width="476" alt="Screenshot 2025-06-17 at 12 32 03 AM" src="https://github.com/user-attachments/assets/4d56330f-e31f-46d4-875e-15b8b5c58a1f" />
+
 ## What It Does
 
 The Spotify Artist Widget fetches and displays:
@@ -258,6 +262,7 @@ SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
    pnpm dev
    ```
    Open [http://127.0.0.1:3000](http://127.0.0.1:3000)
+<img width="1663" alt="Screenshot 2025-06-17 at 12 34 37 AM" src="https://github.com/user-attachments/assets/ba6e1832-74e9-4649-be37-176e8a5b9f11" />
 
 ## Dependencies
 
@@ -287,13 +292,9 @@ The widget requires:
 - No user authentication required
 - Public Spotify data only
 
-## Contributing
-
-Feel free to submit issues and enhancement requests!
-
 ## License
 
-This project is open source and available under the MIT License.
+MIT License.
 
 ---
 
